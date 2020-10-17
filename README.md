@@ -1,6 +1,10 @@
 # default-conversion-rs
 Default conversion for structures with same fields of the same name
 
+EDIT: Just discovered this way to do the same job of this crate: https://stackoverflow.com/questions/57477967/how-can-i-use-serde-to-serialize-a-struct-to-another-rust-data-structure
+
+If someone find a advantage to continue something like mine I will continue develop it.
+
 ## Why I created this ?
 
 Some projects which use derive proc macros need separates structures with similar "structures" to make different things. For example :

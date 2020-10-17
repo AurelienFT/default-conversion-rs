@@ -3,7 +3,9 @@ name = "default-conversion"
 version = "0.1.0"
 authors = ["Aurelien Foucault <aurelien.foucault@epitech.eu>"]
 edition = "2018"
-
+description = "A derive macro to automatic implement conversions between similar structs"
+publish = true
+license = "MIT/Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
 proc-macro = true
