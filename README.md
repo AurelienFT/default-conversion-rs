@@ -123,8 +123,9 @@ Detailed explanations in docs (soon xd).
 - Conversion with complex types.
 - Auto convert to Option or Object as needed.
 
-## Things to add:
+## Next steps:
 
 - Examples
 - Better tests
 - Vectors
+- Docs
