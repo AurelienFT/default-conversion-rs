@@ -6,7 +6,13 @@ edition = "2018"
 description = "A derive macro to automatic implement conversions between similar structs"
 publish = true
 license = "MIT/Apache-2.0"
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+documentation = "https://github.com/AurelienFT/default-conversion-rs"
+homepage = "https://github.com/AurelienFT/default-conversion-rs"
+repository = "https://github.com/AurelienFT/default-conversion-rs"
+keywords = ["macro", "conversion", "proc_macro"]
+categories = ["rust-patterns", "data-structures"]
+readme = "README.md"
+
 [lib]
 proc-macro = true
 

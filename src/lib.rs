@@ -25,7 +25,7 @@ pub fn into_default(item: TokenStream) -> TokenStream {
                         let type_temp = &field.ident;
                         let mut quote_temp = quote! {item.#type_temp.into()};
                         fields_name.push(&field.ident);
-                         if let syn::Type::Path(path) = &field.ty {
+                        if let syn::Type::Path(path) = &field.ty {
                             for segment in &path.path.segments {
                                 if segment.ident == "Option" {
                                     quote_temp = quote! {match item.#type_temp {
@@ -60,7 +60,7 @@ pub fn into_default(item: TokenStream) -> TokenStream {
                              }
                           }
                         }
-  
+
                     });
                 }
             }
