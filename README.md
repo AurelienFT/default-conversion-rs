@@ -11,6 +11,12 @@ Some projects which use derive proc macros need separates structures with simila
 
 - An API with input structures that have some same fields with the model.
 
+## Usage :
+
+```
+default-conversion = "0.1.0"
+```
+
 ## Example :
 
 ### Developper code:
@@ -114,6 +120,7 @@ let b = A::from(a);
 Detailed explanations in docs (soon xd).
 
 `IntoDefault` is the main derive macro to invoke the from implementation.
+
 `IntoStruct` the attribute proc macro to define the type in which we want to implement the conversion. `#[IntoStruct(TYPE_OF_STRUCT)]`
 
 
