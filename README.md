@@ -1,9 +1,9 @@
 # default-conversion-rs
 Default conversion for structures with same fields of the same name
 
-EDIT: Just discovered this way to do the same job of this crate: https://stackoverflow.com/questions/57477967/how-can-i-use-serde-to-serialize-a-struct-to-another-rust-data-structure
+I discovered this way to do the same job of this crate: https://stackoverflow.com/questions/57477967/how-can-i-use-serde-to-serialize-a-struct-to-another-rust-data-structure
 
-If someone find a advantage to continue something like mine I will continue develop it.
+But apparently my way to do it with From is faster : https://github.com/serde-rs/json/issues/724
 
 ## Why I created this ?
 
@@ -16,9 +16,20 @@ Some projects which use derive proc macros need separates structures with simila
 ### Developper code:
 
 ```rust
+struct B {
+    a: i32,
+};
+
+#[derive(IntoDefault)]
+#[IntoStruct(B)]
+struct InputB {
+    a: i32,
+};
+
 struct A {
     a: String,
     b: i32,
+    c: B
 };
 
 #[derive(IntoDefault)]
@@ -26,11 +37,16 @@ struct A {
 struct InputA {
     a: String,
     b: i32,
+    #[IntoType(B)]
+    c: InputB
 };
 
 let a = InputA {
     a: String::from("test"),
     b: 2,
+    c: InputB {
+        a: 3
+    }
 };
 
 let b = A::from(a);
@@ -39,9 +55,28 @@ let b = A::from(a);
 ### Expanded code :
 
 ```rust
+struct B {
+    a: i32,
+};
+
+#[derive(IntoDefault)]
+#[IntoStruct(B)]
+struct InputB {
+    a: i32,
+};
+
+impl From<InputB> for B {
+    fn from(item: InputB) -> Self {
+        B {
+            a: item.a.into()
+        }
+    }
+}
+
 struct A {
     a: String,
     b: i32,
+    c: B
 };
 
 #[derive(IntoDefault)]
@@ -49,13 +84,16 @@ struct A {
 struct InputA {
     a: String,
     b: i32,
+    #[IntoType(B)]
+    c: InputB
 };
 
 impl From<InputA> for A {
     fn from(item: InputA) -> Self {
         A {
-            a: item.a,
-            b: item.b,
+            a: item.a.into(),
+            b: item.b.into(),
+            c: item.c.into()
         }
     }
 }
@@ -63,6 +101,9 @@ impl From<InputA> for A {
 let a = InputA {
     a: String::from("test"),
     b: 2,
+    c: InputB {
+        a: 3
+    }
 };
 
 let b = A::from(a);
@@ -74,3 +115,16 @@ Detailed explanations in docs (soon xd).
 
 `IntoDefault` is the main derive macro to invoke the from implementation.
 `IntoStruct` the attribute proc macro to define the type in which we want to implement the conversion. `#[IntoStruct(TYPE_OF_STRUCT)]`
+
+
+## Supported features:
+
+- Conversion with primitive types.
+- Conversion with complex types.
+- Auto convert to Option or Object as needed.
+
+## Things to add:
+
+- Examples
+- Better tests
+- Vectors
