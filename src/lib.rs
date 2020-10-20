@@ -32,6 +32,8 @@ pub fn into_default(item: TokenStream) -> TokenStream {
                                         Some(value) => value.into(),
                                         None => Default::default()
                                     }};
+                                } else if segment.ident == "Vec" {
+                                    quote_temp = quote! {item.#type_temp.into_iter().map(|v| v.into()).collect::<Vec<_>>()};
                                 }
                             }
                         }
@@ -50,6 +52,12 @@ pub fn into_default(item: TokenStream) -> TokenStream {
                         impl Into<Option<#type_struct>> for #base_type {
                             fn into(self) -> Option<#type_struct> {
                                 Some(self.into())
+                            }
+                        }
+
+                        impl Into<Vec<#type_struct>> for #base_type {
+                            fn into(self) -> Vec<#type_struct> {
+                                vec! {self.into()}
                             }
                         }
 

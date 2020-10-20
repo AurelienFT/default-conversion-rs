@@ -115,6 +115,8 @@ let a = InputA {
 let b = A::from(a);
 ```
 
+## Complete example in [tests/basic_struct.rs](https://github.com/AurelienFT/default-conversion-rs/blob/main/tests/basic_struct.rs)
+
 ## Explanations
 
 Detailed explanations in docs (soon xd).
@@ -129,10 +131,10 @@ Detailed explanations in docs (soon xd).
 - Conversion with primitive types.
 - Conversion with complex types.
 - Auto convert to Option or Object as needed.
+- Conversion with vectors of different types
 
 ## Next steps:
 
 - Examples
 - Better tests
-- Vectors
 - Docs

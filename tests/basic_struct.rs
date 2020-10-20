@@ -22,6 +22,9 @@ fn basic_struct() {
         e: B,
         f: Option<B>,
         g: Option<B>,
+        h: Option<B>,
+        i: Vec<B>,
+        j: Vec<B>,
     };
 
     #[derive(Debug, PartialEq, Eq, Default, IntoDefault)]
@@ -34,6 +37,9 @@ fn basic_struct() {
         e: Option<InputB>,
         f: Option<InputB>,
         g: Option<InputB>,
+        h: InputB,
+        i: Vec<InputB>,
+        j: InputB,
     };
 
     let a = InputA {
@@ -44,6 +50,9 @@ fn basic_struct() {
         e: None,
         f: Some(InputB { a: 5 }),
         g: None,
+        h: InputB { a: 6 },
+        i: vec!{InputB{a: 7}},
+        j: InputB { a: 8},
     };
 
     assert_eq!(
@@ -54,7 +63,10 @@ fn basic_struct() {
             d: B { a: 4 },
             e: B { a: 0 },
             f: Some(B { a: 5 }),
-            g: None
+            g: None,
+            h: Some(B { a: 6 }),
+            i: vec!{B{a: 7}},
+            j: vec!{B{a: 8}},
         },
         A::from(a)
     );
