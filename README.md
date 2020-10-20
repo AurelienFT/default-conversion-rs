@@ -57,62 +57,6 @@ let a = InputA {
 let b = A::from(a);
 ```
 
-### Expanded code :
-
-```rust
-struct B {
-    a: i32,
-};
-
-#[derive(IntoDefault)]
-#[IntoStruct(B)]
-struct InputB {
-    a: i32,
-};
-
-impl From<InputB> for B {
-    fn from(item: InputB) -> Self {
-        B {
-            a: item.a.into()
-        }
-    }
-}
-
-struct A {
-    a: String,
-    b: i32,
-    c: B
-};
-
-#[derive(IntoDefault)]
-#[IntoStruct(A)]
-struct InputA {
-    a: String,
-    b: i32,
-    c: InputB
-};
-
-impl From<InputA> for A {
-    fn from(item: InputA) -> Self {
-        A {
-            a: item.a.into(),
-            b: item.b.into(),
-            c: item.c.into()
-        }
-    }
-}
-
-let a = InputA {
-    a: String::from("test"),
-    b: 2,
-    c: InputB {
-        a: 3
-    }
-};
-
-let b = A::from(a);
-```
-
 ## Complete example in [tests/basic_struct.rs](https://github.com/AurelienFT/default-conversion-rs/blob/main/tests/basic_struct.rs)
 
 ## Explanations
