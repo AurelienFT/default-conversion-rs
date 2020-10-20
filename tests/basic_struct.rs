@@ -51,8 +51,8 @@ fn basic_struct() {
         f: Some(InputB { a: 5 }),
         g: None,
         h: InputB { a: 6 },
-        i: vec!{InputB{a: 7}},
-        j: InputB { a: 8},
+        i: vec![InputB { a: 7 }],
+        j: InputB { a: 8 },
     };
 
     assert_eq!(
@@ -65,8 +65,8 @@ fn basic_struct() {
             f: Some(B { a: 5 }),
             g: None,
             h: Some(B { a: 6 }),
-            i: vec!{B{a: 7}},
-            j: vec!{B{a: 8}},
+            i: vec! {B{a: 7}},
+            j: vec! {B{a: 8}},
         },
         A::from(a)
     );
