@@ -43,7 +43,6 @@ struct A {
 struct InputA {
     a: String,
     b: i32,
-    #[IntoType(B)]
     c: InputB
 };
 
