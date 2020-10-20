@@ -1,6 +1,6 @@
 [package]
 name = "default-conversion"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Aurelien Foucault <aurelien.foucault@epitech.eu>"]
 edition = "2018"
 description = "A derive macro to automatic implement conversions between similar structs"
