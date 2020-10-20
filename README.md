@@ -1,5 +1,5 @@
 # default-conversion-rs
-Default conversion for structures with same fields of the same name
+Default conversion for structures with similar fields
 
 I discovered this way to do the same job of this crate: https://stackoverflow.com/questions/57477967/how-can-i-use-serde-to-serialize-a-struct-to-another-rust-data-structure
 
