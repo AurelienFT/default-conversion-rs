@@ -3,7 +3,7 @@ Default conversion for structures with similar fields
 
 I discovered this way to do the same job of this crate: https://stackoverflow.com/questions/57477967/how-can-i-use-serde-to-serialize-a-struct-to-another-rust-data-structure
 
-But apparently my way to do it with From is faster : https://github.com/serde-rs/json/issues/724
+But my way to do it with From guarantee a type-safe conversion and apparently it's faster : https://github.com/serde-rs/json/issues/724
 
 ## Why I created this ?
 
