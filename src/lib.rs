@@ -2,6 +2,7 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::Ident;
 use syn::{parse_macro_input, DeriveInput};
+mod attribute;
 
 fn _print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
@@ -15,7 +16,7 @@ pub fn into_default(item: TokenStream) -> TokenStream {
     let mut code: TokenStream = TokenStream::from(quote! {});
     for attribute in attributes {
         if attribute.path.is_ident("IntoStruct") {
-            let type_struct = attribute.parse_args::<Ident>().unwrap();
+            let attribute_args = attribute.parse_args::<attribute::AttributeArgs>().unwrap();
             if let syn::Data::Struct(d) = &ast.data {
                 if let syn::Fields::Named(f) = &d.fields {
                     let fields = &f.named;
@@ -39,6 +40,7 @@ pub fn into_default(item: TokenStream) -> TokenStream {
                         }
                         fields_value.push(quote_temp);
                     }
+                    let type_struct = attribute_args.type_struct;
                     code = TokenStream::from(quote! {
                         impl From<Option<#base_type>> for #type_struct {
                             fn from(item: Option<#base_type>) -> Self {
