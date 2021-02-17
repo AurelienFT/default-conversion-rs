@@ -7,13 +7,31 @@ pub struct AttributeArgs {
 
 impl Parse for AttributeArgs {
     fn parse(input: ParseStream<'_>) -> Result<Self> {
-        let test: syn::Ident = input.parse::<syn::Ident>()?;
-        //println!("test3 = {:#?}", test);
-        Ok( 
-            AttributeArgs {
-                type_struct: test,
-                fields_defined: None
-            }
-        )
+        let type_struct: syn::Ident = input.parse::<syn::Ident>()?;
+        let content;
+        if input.is_empty() {
+            Ok( 
+                AttributeArgs {
+                    type_struct: type_struct,
+                    fields_defined: None
+                }
+            )
+        } else {
+            input.parse::<syn::Ident>()?;
+            syn::parenthesized!(content in input);
+            Ok( 
+                AttributeArgs {
+                    type_struct: type_struct,
+                    fields_defined: Some({
+                        let mut fields_defined = Vec::new();
+                        while !content.is_empty() {
+                            let test_fields: (Ident, syn::token::Eq, Ident) = (content.parse()?, content.parse()?, content.parse()?);
+                            fields_defined.push((test_fields.0, test_fields.2));
+                        }
+                        fields_defined
+                    })
+                }
+            )
+        }
     }
 }

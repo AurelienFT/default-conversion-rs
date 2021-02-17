@@ -1,17 +1,21 @@
 use default_conversion::*;
-
 #[test]
 fn basic_struct() {
+
+    fn generate_k() -> i32 {
+        2
+    }
+
     #[derive(Debug, PartialEq, Eq, Default)]
     struct B {
         a: i32,
-    };
+    }
 
     #[derive(Debug, PartialEq, Eq, Default, IntoDefault)]
     #[IntoStruct(B)]
     struct InputB {
         a: i32,
-    };
+    }
 
     #[derive(Debug, PartialEq, Eq, Default)]
     struct A {
@@ -25,10 +29,15 @@ fn basic_struct() {
         h: Option<B>,
         i: Vec<B>,
         j: Vec<B>,
-    };
+    }
 
     #[derive(Debug, PartialEq, Eq, Default, IntoDefault)]
-    #[IntoStruct(A)]
+    #[IntoStruct(
+        A
+        fields(
+            k = generate_k
+        )
+    )]
     struct InputA {
         a: String,
         b: i32,
@@ -40,7 +49,7 @@ fn basic_struct() {
         h: InputB,
         i: Vec<InputB>,
         j: InputB,
-    };
+    }
 
     let a = InputA {
         a: String::from("test"),
