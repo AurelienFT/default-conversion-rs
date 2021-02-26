@@ -1,7 +1,6 @@
 use default_conversion::*;
 #[test]
 fn basic_struct() {
-
     fn generate_k() -> i32 {
         2
     }
